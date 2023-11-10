@@ -23,7 +23,7 @@ By using cameras, we can get the position of the car even if the car is not in t
 
 ## 4. Potential Impact
 
-If the detection is successful, it will make car detection more accurate.
+If the detection is successful, it will make car detection more accurate. (ADD MORE)
 
 ## 5. Challenges
 
