@@ -38,7 +38,8 @@ Third, lane switching is also a challenge, including the car in front/in the bac
 Fourth, in some states, cars are not required to have a lisence plate at the front end, so plate detection won't work in these cases. We will have to use two cameras to calculate the depth instead, or detect the appearance of the full car, and calculate the distance by using the width of the car.
 
 ## 6. Requirements for Success
-What skills and resources are necessary to perform the project?
+
+To complete car detection, the most substantial skill is to be able to utilize computer vision and machine learning, and manipulate existing tool kits such as OpenCV, Sci-kit learn, etc.
 
 ## 7. Metrics of Success
 What are metrics by which you would check for success?
