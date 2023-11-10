@@ -5,4 +5,5 @@
 
 
 # Required Submissions
-Proposal(docs/proposal.md)
+[Proposal](docs/proposal.md)
+[Final Report](docs/report.md)
