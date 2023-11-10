@@ -13,13 +13,29 @@ Today, distance detection is often achieved by radar, which may possibly cause p
 
 ## 3. Novelty & Rationale
 
-Instead of radar, we use 
+Instead of radar, we use camera to detect the car in front, and calculate the distance. There are two ways to achieve the goal:
+
+1. Detect the license plate of the car in front, and calculate the distance by the ratio of the plate appearing in the camera and the actual size.
+
+2. Use two camera shooting in different angle, and calculate the depth by combining the two footages.
+
+By using cameras, we can get the position of the car even if the car is not in the middle on curve roads.
 
 ## 4. Potential Impact
-If the project is successful, what difference will it make, both technically and broadly?
+
+If the detection is successful, it will make car detection more accurate.
 
 ## 5. Challenges
-What are the challenges and risks?
+
+There might be some challenges by using computer vision.
+
+First, due to the resolution limit of the camera, if the vehicle in front is too far away, the lisence plate will become significantly small on the camera, which makes it harder to detect, and ends up in large error. This may be resolved by using higher resolution camera, or simply pause the process if the distance is too far to be considered.
+
+Second, there might be multiple lisence plated showing on the camera, especially if the traffic is heavy. Detecting the correct plate of the car in front is also a foreseeable issue.
+
+Third, lane switching is also a challenge, including the car in front/in the back switching lane, or another car cutting in between. The sudden change of the distance may cause the device to calculate the wrong speed, therefore resulting in incorrect alarms.
+
+Fourth, in some states, cars are not required to have a lisence plate at the front end, so the detection won't work in these cases. We will have to detect the appearance of the full car instead, and calculate the distance by using the width of the car.
 
 ## 6. Requirements for Success
 What skills and resources are necessary to perform the project?
