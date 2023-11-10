@@ -1,12 +1,19 @@
 # Project Proposal
 ## 1. Motivation & Objective
-What are you trying to do and why? (plain English without jargon)
+
+It is important to maintain a safe distance between cars while driving to avoid coliision. In California, this distance is often called the "3-second rule", which means the distance between your vehicle and the vehicle in front should exceed the travel distance of your current speed in 3 seconds.
+
+We aim to make a driving assistance which detected the current speed of your car and the car in front, as well as the distance between the two vehicles. If the distance violates the 3-second rule, we warn the driver.
+
+Additionally, we also make use of this concept to the car in the back, which means the device will also detect the distance and the speed of the car behind, and flashing a warning sign to the back car is the distance is too short.
 
 ## 2. State of the Art & Its Limitations
-How is it done today, and what are the limits of current practice?
+
+Today, distance detection is often achieved by radar, which may possibly cause problems while driving on curve roads, where radar signals are less likely to successfully reanch the car in front.
 
 ## 3. Novelty & Rationale
-What is new in your approach and why do you think it will be successful?
+
+Instead of radar, we use 
 
 ## 4. Potential Impact
 If the project is successful, what difference will it make, both technically and broadly?
