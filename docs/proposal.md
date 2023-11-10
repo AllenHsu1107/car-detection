@@ -35,7 +35,7 @@ Second, there might be multiple lisence plated showing on the camera, especially
 
 Third, lane switching is also a challenge, including the car in front/in the back switching lane, or another car cutting in between. The sudden change of the distance may cause the device to calculate the wrong speed, therefore resulting in incorrect alarms.
 
-Fourth, in some states, cars are not required to have a lisence plate at the front end, so the detection won't work in these cases. We will have to detect the appearance of the full car instead, and calculate the distance by using the width of the car.
+Fourth, in some states, cars are not required to have a lisence plate at the front end, so plate detection won't work in these cases. We will have to use two cameras to calculate the depth instead, or detect the appearance of the full car, and calculate the distance by using the width of the car.
 
 ## 6. Requirements for Success
 What skills and resources are necessary to perform the project?
