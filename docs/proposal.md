@@ -25,7 +25,7 @@ By using cameras, we can get the position of the car even if the car is not in t
 
 ## 4. Potential Impact
 
-If the detection is successful, it will make car detection more accurate. (ADD MORE)
+Current radar systems, while effective in measuring distances and speeds, often face limitations in precise object identification and struggle in scenarios with high-density traffic or sharp curves. In contrast, the use of computer vision in the driving assistance system offers a novel approach that addresses some of these limitations. Therefore, if computer vision is successfully implemented, it will increase the accuracy of car detection, as well as enhance road safety.
 
 ## 5. Challenges
 
