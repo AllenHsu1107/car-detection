@@ -8,7 +8,7 @@ Yi-Lin Tsai
 
 Jian-Ting Ko
 
-Yao-Ting Hsu 606072163
+Yao-Ting Hsu
 
 # Required Submissions
 - [Proposal](proposal.md)
