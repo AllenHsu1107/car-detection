@@ -97,7 +97,9 @@ This dataset contains 433 images with bounding box annotations of the car licens
 Pre-trained License Plate Detection Model [6]
 
 ### 9.c. Software
-List softwate that you have identified and plan to use. Provide references (with full citation in the References section below).
+
+**Python Library**: OpenCV, Sci-kit Learn
+**Webcam**: Iriun
 
 ## 10. References
 [1] Silva, S.M., Jung, C.R. (2018). License Plate Detection and Recognition in Unconstrained Scenarios. In: Ferrari, V., Hebert, M., Sminchisescu, C., Weiss, Y. (eds) Computer Vision – ECCV 2018. ECCV 2018. Lecture Notes in Computer Science(), vol 11216. Springer, Cham. https://doi.org/10.1007/978-3-030-01258-8_36 
