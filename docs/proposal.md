@@ -43,7 +43,7 @@ There are several challenges associated with utilizing computer vision for this 
 
 ## 6. Requirements for Success
 
-To complete car detection, the most substantial skill is to be able to utilize computer vision and machine learning, and manipulate existing tool kits such as OpenCV, Sci-kit learn, etc.
+To complete car detection, the most substantial skill is to be able to utilize computer vision and machine learning, and manipulate existing tool kits such as OpenCV, Sci-kit Learn, etc.
 
 ## 7. Metrics of Success
 
@@ -99,6 +99,7 @@ Pre-trained License Plate Detection Model [6]
 ### 9.c. Software
 
 **Python Library**: OpenCV, Sci-kit Learn
+
 **Webcam**: Iriun
 
 ## 10. References
