@@ -1,27 +1,27 @@
 # Project Proposal
 ## 1. Motivation & Objective
 
-It is important to maintain a safe distance between cars while driving to avoid coliision. In California, this distance is often called the "3-second rule", which means the distance between your vehicle and the vehicle in front should exceed the travel distance of your current speed in 3 seconds.
+Ensuring a safe distance between vehicles while driving is critical to prevent collisions. In California, this guideline, known as the "3-second rule," dictates that the gap between your vehicle and the one in front should exceed the distance your current speed would cover in 3 seconds.
 
-We aim to make a driving assistance which detected the current speed of your car and the car in front, as well as the distance between the two vehicles. If the distance violates the 3-second rule, we warn the driver.
+Our objective is to create a driving assistance system that monitors the current speed of both your car and the one in front, while also gauging the distance separating the two vehicles. When this distance falls short of the 3-second rule, our system alerts the driver.
 
-Additionally, we also make use of this concept to the car in the back, which means the device will also detect the distance and the speed of the car behind, and flashing a warning sign to the back car is the distance is too short.
+Moreover, we aim to extend this concept to the vehicle behind as well. This entails detecting the distance and speed of the car trailing behind. If this distance is insufficient, a warning signal will be triggered to alert the trailing vehicle.
 
 ## 2. State of the Art & Its Limitations
 
-Today, distance detection is often achieved by radar, which may possibly cause problems while driving on curve roads, where radar signals are less likely to successfully reanch the car in front.
+Presently, distance detection is commonly accomplished through radar technology, which can encounter challenges on curved roads where radar signals might have difficulty reaching the vehicle ahead effectively.
 
 ## 3. Novelty & Rationale
 
-Instead of radar, we use camera to detect the car in front, and calculate the distance. There are few ways to achieve the goal:
+Instead of relying on radar, our approach involves utilizing cameras to identify the car in front and compute the distance. We've devised several methods to achieve this:
 
-1. Detect the license plate of the car in front, and calculate the distance by the ratio of the plate appearing in the camera and the actual size.
+License Plate Detection: Identifying the license plate of the lead vehicle and using the size ratio between its appearance in the camera and its actual dimensions to calculate the distance.
 
-2. Use two camera shooting from different angle, and calculate the depth by combining the two footages.
+Dual Camera Setup: Employing two cameras capturing different angles to calculate depth by integrating the data from both sources.
 
-3. Detect the appearance of the vehicle itself, and the vanish point of the lanes, and calculate the relative position of the vehicle.
+Vehicle and Lane Appearance Analysis: Recognizing the vehicle itself and determining the vanishing point of the lanes to calculate the vehicle's relative position.
 
-By using cameras, we can get the position of the car even if the car is not in the middle on curve roads.
+Using cameras offers the advantage of determining the car's position even when it's not centrally positioned, particularly on curved roads.
 
 ## 4. Potential Impact
 
@@ -29,17 +29,17 @@ Current radar systems, while effective in measuring distances and speeds, often 
 
 ## 5. Challenges
 
-There might be some challenges by using computer vision.
+There are several challenges associated with utilizing computer vision for this purpose:
 
-First, due to the resolution limit of the camera, if the vehicle in front is too far away, the license plate will become significantly small on the camera, which makes it harder to detect, and ends up in large error. This may be resolved by using higher resolution camera, or simply pause the process if the distance is too far to be considered.
+Resolution Limitations: When the vehicle ahead is at a significant distance, the camera's resolution may cause the license plate to appear small, making detection difficult and resulting in substantial errors. Mitigation could involve employing higher resolution cameras or pausing the process when the distance is too far to yield accurate readings.
 
-Second, there might be multiple lisence plated showing on the camera, especially if the traffic is heavy. Detecting the correct plate of the car in front is also a foreseeable issue.
+Multiple License Plates: Heavy traffic scenarios might present multiple visible license plates, complicating the identification of the correct plate of the lead vehicle.
 
-Third, lane switching is also a challenge, including the car in front/in the back switching lane, or another car cutting in between. The sudden change of the distance may cause the device to calculate the wrong speed, therefore resulting in incorrect alarms.
+Lane Switching Issues: Instances of vehicles changing lanes, either ahead or behind, or another vehicle cutting in between, pose a challenge. Such sudden alterations in distance can cause the system to miscalculate speeds, leading to incorrect warnings.
 
-Fourth, in some states, cars are not required to have a lisence plate at the front end, so plate detection won't work in these cases. We will have to use two cameras to calculate the depth instead, or detect the appearance of the full car, and calculate the distance by using the width of the car.
+Lack of Front License Plates: In states where front license plates are not mandatory, traditional plate detection methods won't apply. Using two cameras to calculate depth or assessing the entire car's appearance and determining distance based on its width might serve as alternative solutions.
 
-Fifth, the detected distances are not always reliable. The system needs to know which detected distances are likely to be errors and discards them. The problem can be solved by using the Kalman filter.
+Reliability of Detected Distances: The system might encounter inaccuracies in the distances detected. Implementing a mechanism, like the Kalman filter, becomes necessary to discern and discard potentially erroneous distance readings.
 
 ## 6. Requirements for Success
 
@@ -47,18 +47,26 @@ To complete car detection, the most substantial skill is to be able to utilize c
 
 ## 7. Metrics of Success
 
-For distance estimating, The metrics include speed of processing, accuracy in identifying objects or people, and system reliability across various environmental conditions.
-For the Kalman filter, the metric of success is the improvement of the accuracy of the detected distances.
+For distance estimation, critical metrics encompass the speed of processing, precision in identifying objects or individuals, and system reliability under diverse environmental conditions. As for the Kalman filter, the primary metric for success revolves around enhancing the accuracy of detected distances.
 
 ## 8. Execution Plan
 
-Yi-Lin Tsai: Research and implement Kalman filter to discard the wrong detected distances.
+Yi-Lin Tsai:
+Research and implement the Kalman filter to effectively eliminate incorrectly detected distances. This involves developing and integrating the Kalman filter into the system to enhance the accuracy and reliability of the detected distances.
 
-Jian-Ting Ko: Estimate the distance and relative velocity between our car and the front car. The following are two possible ways:
-Computing the ratio of the license plate in the video and the real one.
-Using depth estimation by dual-camera.
+Jian-Ting Ko:
+Focused on estimating the distance and relative velocity between our car and the car in the front. This involves exploring two possible methods:
 
-Yao-Ting Hsu: Estimate the distance and relative velocity between our car and the back car, using either car body detection to calculate the distance from the ratio of the actual car width and the size appearing in the camera, or lane detection and calculate the distance from the angle.
+License Plate Ratio Computation: Develop a method to compute the distance and relative velocity by assessing the ratio of the license plate's appearance in the video feed compared to its actual size.
+
+Dual-Camera Depth Estimation: Implement a system utilizing dual cameras to estimate distance and relative velocity through depth estimation techniques.
+
+Yao-Ting Hsu:
+Tasked with estimating the distance and relative velocity between our car and the car behind. This involves exploring two potential methods:
+
+Car Body Detection: Develop a system to detect the car behind and calculate distance and relative velocity based on the actual car width and its size as captured by the camera.
+
+Lane Detection: Implement a system that uses lane detection to calculate the distance and relative velocity from the angle and position of the car in the back relative to our vehicle.
 
 ## 9. Related Work
 ### 9.a. Papers
