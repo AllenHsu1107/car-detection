@@ -44,17 +44,19 @@ Fifth, the detected distances are not always reliable. The system needs to know 
 To complete car detection, the most substantial skill is to be able to utilize computer vision and machine learning, and manipulate existing tool kits such as OpenCV, Sci-kit learn, etc.
 
 ## 7. Metrics of Success
-What are metrics by which you would check for success?
+
 For distance estimating, The metrics include speed of processing, accuracy in identifying objects or people, and system reliability across various environmental conditions.
 For the Kalman filter, the metric of success is the improvement of the accuracy of the detected distances.
 
 ## 8. Execution Plan
-Describe the key tasks in executing your project, and in case of team project describe how will you partition the tasks.
 
 Yi-Lin Tsai: Research and implement Kalman filter to discard the wrong detected distances.
+
 Jian-Ting Ko: Estimate the distance and relative velocity between our car and the front car. The following are two possible ways:
 Computing the ratio of the license plate in the video and the real one.
 Using depth estimation by dual-camera.
+
+Yao-Ting Hsu: Estimate the distance and relative velocity between our car and the back car, using either car body detection to calculate the distance from the ratio of the actual car width and the size appearing in the camera, or lane detection and calculate the distance from the angle.
 
 ## 9. Related Work
 ### 9.a. Papers
