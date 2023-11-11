@@ -73,21 +73,20 @@ Tasked with estimating the distance and relative velocity between our car and th
 
 ## 9. Related Work
 ### 9.a. Papers
-License Plate Detection and Recognition in Unconstrained Scenarios [1]
+License Plate Detection and Recognition in Unconstrained Scenarios [1]  
 This paper elucidates the methodology for vehicle and license plate detection, crucial for the project's implementation in determining distances.
 
-An introduction to the Kalman filter [2]
+An introduction to the Kalman filter [2]  
 This paper provides a description, a derivation, and a simple example of the Kalman filter.
 
-Depth estimation by dual-camera [3]
+Depth estimation by dual-camera [3]  
 This paper outlines a method to estimate depth using a dual-camera system.
 
-Vision-based Vehicle Detection and Distance Estimation [4]
+Vision-based Vehicle Detection and Distance Estimation [4]  
 This paper describes a approach to estimate the distance of a vehicle by detecting the vehicle itself and the vanish point of the lanes.
 
 ### 9.b. Datasets
-Car License Plate [5]
-
+Car License Plate [5]  
 This dataset contains 433 images with bounding box annotations of the car license plates within the image.
 
 Pre-trained License Plate Detection Model [6]
