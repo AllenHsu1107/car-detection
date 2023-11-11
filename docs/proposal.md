@@ -87,7 +87,9 @@ This paper describes a approach to estimate the distance of a vehicle by detecti
 
 ### 9.b. Datasets
 Car License Plate [5]
+
 This dataset contains 433 images with bounding box annotations of the car license plates within the image.
+
 Pre-trained License Plate Detection Model [6]
 
 ### 9.c. Software
