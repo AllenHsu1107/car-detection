@@ -13,11 +13,13 @@ Today, distance detection is often achieved by radar, which may possibly cause p
 
 ## 3. Novelty & Rationale
 
-Instead of radar, we use camera to detect the car in front, and calculate the distance. There are two ways to achieve the goal:
+Instead of radar, we use camera to detect the car in front, and calculate the distance. There are few ways to achieve the goal:
 
 1. Detect the license plate of the car in front, and calculate the distance by the ratio of the plate appearing in the camera and the actual size.
 
-2. Use two camera shooting in different angle, and calculate the depth by combining the two footages.
+2. Use two camera shooting from different angle, and calculate the depth by combining the two footages.
+
+3. Detect the appearance of the vehicle itself, and the vanish point of the lanes, and calculate the relative position of the vehicle.
 
 By using cameras, we can get the position of the car even if the car is not in the middle on curve roads.
 
@@ -64,16 +66,18 @@ License Plate Detection and Recognition in Unconstrained Scenarios [1]
 This paper elucidates the methodology for vehicle and license plate detection, crucial for the project's implementation in determining distances.
 
 An introduction to the Kalman filter [2]
-The paper provides a description, a derivation, and a simple example of the Kalman filter.
+This paper provides a description, a derivation, and a simple example of the Kalman filter.
 
 Depth estimation by dual-camera [3]
-The paper outlines a method to estimate depth using a dual-camera system.
+This paper outlines a method to estimate depth using a dual-camera system.
 
+Vision-based Vehicle Detection and Distance Estimation [4]
+This paper describes a approach to estimate the distance of a vehicle by detecting the vehicle itself and the vanish point of the lanes.
 
 ### 9.b. Datasets
-Car License Plate [4]
+Car License Plate [5]
 This dataset contains 433 images with bounding box annotations of the car license plates within the image.
-Pre-trained License Plate Detection Model [5]
+Pre-trained License Plate Detection Model [6]
 
 ### 9.c. Software
 List softwate that you have identified and plan to use. Provide references (with full citation in the References section below).
@@ -86,5 +90,8 @@ List softwate that you have identified and plan to use. Provide references (with
 [3] Zhang, Y., Wadhwa, N., Orts, S., Häne, C., Fanello, S., & Garg, R. (2020). Du2Net: Learning Depth Estimation from Dual-Cameras and Dual-Pixels. European Conference on Computer Vision.
 https://arxiv.org/abs/2003.14299 
 
-[4] https://www.kaggle.com/datasets/andrewmvd/car-plate-detection/data 
-[5] https://github.com/quangnhat185/Plate_detect_and_recognize 
+[4] Donghao Qiao, Farhana H. Zulkernine (2020). "Vision-based Vehicle Detection and Distance Estimation". Conference: 2020 IEEE Symposium Series on Computational Intelligence (SSCI). 
+
+[5] https://www.kaggle.com/datasets/andrewmvd/car-plate-detection/data 
+
+[6] https://github.com/quangnhat185/Plate_detect_and_recognize 
