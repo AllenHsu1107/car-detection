@@ -102,6 +102,8 @@ Pre-trained License Plate Detection Model [6]
 
 **Webcam**: Iriun
 
+**Pretrained Model**: YOLOv4
+
 ## 10. References
 [1] Silva, S.M., Jung, C.R. (2018). License Plate Detection and Recognition in Unconstrained Scenarios. In: Ferrari, V., Hebert, M., Sminchisescu, C., Weiss, Y. (eds) Computer Vision – ECCV 2018. ECCV 2018. Lecture Notes in Computer Science(), vol 11216. Springer, Cham. https://doi.org/10.1007/978-3-030-01258-8_36 
 
