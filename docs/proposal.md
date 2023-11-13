@@ -116,4 +116,6 @@ https://arxiv.org/abs/2003.14299
 
 [5] https://www.kaggle.com/datasets/andrewmvd/car-plate-detection/data 
 
-[6] https://github.com/quangnhat185/Plate_detect_and_recognize 
+[6] https://github.com/quangnhat185/Plate_detect_and_recognize
+
+[7] https://github.com/Arun-purakkatt/medium_repo
