@@ -2,9 +2,9 @@ import numpy as np
 import matplotlib.pyplot as plt
 from scipy.optimize import minimize
 
-def kalman_filter(observed_distance, time_intervals, process_variance, measurement_variance):
-    initial_distance = observed_distance[0]
-    initial_velocity = 0.0
+def kalman_filter(observed_distance, time_intervals, process_variance, measurement_variance, initial_state):
+    initial_distance = initial_state[0]
+    initial_velocity = initial_state[1]
     x = np.array([[initial_distance], [initial_velocity]])  # State vector [distance, velocity]
     P = np.diag([1, 1])  # Initial covariance matrix
     H = np.array([[1, 0]])  # Measurement matrix
@@ -33,10 +33,10 @@ np.random.seed(42)
 true_distance = np.linspace(0, 100, 100)
 observed_distance = true_distance + np.random.normal(0, 5, 100)
 time_intervals = np.random.uniform(0.5, 1.5, 100)
-
+initial_state = [observed_distance[0], 0.0] # [initial distance, initial relative velocity]
 def objective_function(params):
     process_variance, measurement_variance = params
-    estimated_distance = kalman_filter(observed_distance, time_intervals, process_variance, measurement_variance)
+    estimated_distance = kalman_filter(observed_distance, time_intervals, process_variance, measurement_variance, initial_state)
     mse = np.mean((true_distance - estimated_distance)**2)
     return mse
 
@@ -44,8 +44,8 @@ initial_guess = [0.1, 5.0]
 bounds = [(1e-5, 1.0), (1e-5, 10.0)]
 result = minimize(objective_function, initial_guess, bounds=bounds)
 best_process_variance, best_measurement_variance = result.x
-estimated_distance_optimized = kalman_filter(observed_distance, time_intervals, best_process_variance, best_measurement_variance)
-estimated_distance_unoptimized = kalman_filter(observed_distance, time_intervals, initial_guess[0], initial_guess[1])
+estimated_distance_optimized = kalman_filter(observed_distance, time_intervals, best_process_variance, best_measurement_variance, initial_state)
+estimated_distance_unoptimized = kalman_filter(observed_distance, time_intervals, initial_guess[0], initial_guess[1], initial_state)
 plt.figure(figsize=(12, 6))
 plt.subplot(1, 2, 1)
 plt.plot(true_distance, label='True Distance')
