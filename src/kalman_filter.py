@@ -44,7 +44,7 @@ def objective_function(params):
 
 
 initial_guess = [0.1, 5.0]
-bounds = [(1e-5, 1), (1.0, 50)]
+bounds = [(1e-6, 1.0), (1.0, 10)]
 state = initial_state
 P = initial_P  # Initial covariance matrix
 estimated_distance_unoptimized = []
