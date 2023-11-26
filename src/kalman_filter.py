@@ -14,7 +14,7 @@ def kalman_filter(observed_distance, delta_t, process_variance, measurement_vari
     x_hat = np.dot(F, x)
     P_hat = np.dot(np.dot(F, P), F.T) + Q
     # Update step
-    y = observed_distance[i] - np.dot(H, x_hat)
+    y = observed_distance - np.dot(H, x_hat)
     S = np.dot(np.dot(H, P_hat), H.T) + R
     K = np.dot(np.dot(P_hat, H.T), np.linalg.inv(S))
     x = x_hat + np.dot(K, y)
@@ -37,7 +37,7 @@ def objective_function(params):
     state = initial_state
     P = initial_P
     for i in range(len(observed_distance)):
-        state, P = kalman_filter(observed_distance, time_intervals[i], process_variance, measurement_variance, state, P)
+        state, P = kalman_filter(observed_distance[i], time_intervals[i], process_variance, measurement_variance, state, P)
         estimated_distance.append(state[0])
     mse = np.mean((true_distance - estimated_distance)**2)
     return mse
@@ -49,7 +49,7 @@ state = initial_state
 P = initial_P  # Initial covariance matrix
 estimated_distance_unoptimized = []
 for i in range(len(observed_distance)):
-    state, P = kalman_filter(observed_distance, time_intervals[i], initial_guess[0], initial_guess[1], state, P)
+    state, P = kalman_filter(observed_distance[i], time_intervals[i], initial_guess[0], initial_guess[1], state, P)
     estimated_distance_unoptimized.append(state[0])
 if optimize:
     result = minimize(objective_function, initial_guess, bounds=bounds)
@@ -58,7 +58,7 @@ if optimize:
     P = initial_P
     estimated_distance_optimized = []
     for i in range(len(observed_distance)):
-        state, P = kalman_filter(observed_distance, time_intervals[i], best_process_variance, best_measurement_variance, state, P)
+        state, P = kalman_filter(observed_distance[i], time_intervals[i], best_process_variance, best_measurement_variance, state, P)
         estimated_distance_optimized.append(state[0])
 
 mse_observed = np.mean((true_distance - observed_distance)**2)
