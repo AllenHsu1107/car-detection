@@ -19,6 +19,8 @@ from kalman_filter import kalman_filter, objective_function
 from spring_mass import spring_mass
 from scipy.optimize import minimize
 
+initial = True
+
 DISTANCE = 3
 initial_guess = [0.1, 5.0]
 bounds = [(1e-5, 1), (1.0, 50)]
@@ -275,7 +277,12 @@ def detect(save_img=False):
                 #best_process_variance, best_measurement_variance = result.x
                 best_process_variance = initial_guess[0]
                 best_measurement_variance = initial_guess[1]
-                global state, P
+                global initial, state, P
+
+                if initial == True:
+                    state = np.array([dis, 0.0])
+                    initial = False
+
                 state, P = kalman_filter(dis, 1.0, best_process_variance, best_measurement_variance, state, P)
                 estimated_distance_optimized = state[0]
 
