@@ -2,6 +2,7 @@ import cv2
 import numpy as np
 from ultralytics import YOLO
 from math import *
+from kalman_filter import kalman_filter
 
 # Load image or video
 path_right = 'example/test_r.mp4'
@@ -32,8 +33,11 @@ def DetectObject(objName,img):
     for i in first_output.boxes:
         if names[int(i.cls)] == objName:
             x1,y1,x2,y2 = i.xyxy[0][0],i.xyxy[0][1],i.xyxy[0][2],i.xyxy[0][3]
-            point.append([(x1+x2)/2,(y1+y2)/2])
-            r.append([(x2-x1)/2,(y2-y1)/2])
+            xmid, ymid = (x1+x2)/2,(y1+y2)/2
+            print(xmid,ymid)
+            if ((ymid/xmid > (pixely_right/pixelx_right*2)) or (ymid/xmid > (-pixely_right/pixelx_right*2+2*pixely_right/xmid))):
+                point.append([(x1+x2)/2,(y1+y2)/2])
+                r.append([(x2-x1)/2,(y2-y1)/2])
         # print("Detected object: ", names[int(i.cls)], " with probability: ", i.conf[0], "Bounded by: ", i.xyxy)
     return point,r
 
@@ -137,6 +141,8 @@ if not cap_right:
     
     
 else:
+
+    first = True
     while True:
         #capture frame_right by frame_right
         _, frame_right = cap_right.read()
@@ -151,4 +157,14 @@ else:
         distance = []
         distance = EstDistance(final_match,pixelx_left,pixelx_right,dis_camera,w_left,w_right)
         # print(final_match)
-        print(distance)
+        print("Observe Distance:", distance)
+        if first:
+            first = False
+            if distance:
+                x = [distance[0], 0.0]
+            else:
+                x = [0.0, 0.0]
+            p = np.diag([1,1])
+        x,p = kalman_filter(distance, 0.05, 0.1, 5.0, x, p)
+        print("Distance by k-filter:", x)
+
