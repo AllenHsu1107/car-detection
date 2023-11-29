@@ -16,6 +16,8 @@ pixely_left = 960
 pixelx_right = 540
 pixely_right = 960
 
+frameTime = 0.05
+
 dis_camera = 0.31
 w_left = 31.5/180*pi
 w_right = 34/180*pi
@@ -32,36 +34,13 @@ def DetectObject(objName,img):
     r = []
     for i in first_output.boxes:
         if names[int(i.cls)] == objName:
-            x1,y1,x2,y2 = i.xyxy[0][0],i.xyxy[0][1],i.xyxy[0][2],i.xyxy[0][3]
+            x1,y1,x2,y2 = int(i.xyxy[0][0]),int(i.xyxy[0][1]),int(i.xyxy[0][2]),int(i.xyxy[0][3])
+            cv2.rectangle(img, (x1, y1), (x2, y2), (0, 255, 0), 3)
             xmid, ymid = (x1+x2)/2,(y1+y2)/2
-            print(xmid,ymid)
-            if ((ymid/xmid > (pixely_right/pixelx_right*2)) or (ymid/xmid > (-pixely_right/pixelx_right*2+2*pixely_right/xmid))):
-                point.append([(x1+x2)/2,(y1+y2)/2])
-                r.append([(x2-x1)/2,(y2-y1)/2])
-        # print("Detected object: ", names[int(i.cls)], " with probability: ", i.conf[0], "Bounded by: ", i.xyxy)
+            # if ((ymid/xmid > (pixely_right/pixelx_right*3)) or (ymid/xmid > (-pixely_right/pixelx_right*3+3*pixely_right/xmid))):
+            point.append([xmid,ymid])
+            r.append([(x2-x1)/2,(y2-y1)/2])
     return point,r
-
-#use trained cars XML classifiers
-car_cascade = cv2.CascadeClassifier('cars.xml')
-
-# pixelx_left = 1110
-# pixely_left = 1474
-
-# pixelx_right = 1109
-# pixely_right = 1479
-
-def DetectCars(frame):
-    gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-    cars = car_cascade.detectMultiScale(gray, 1.03, 3)
-    point = []
-    r = []
-    for (x,y,w,h) in cars:
-        point.append([x+w/2,y+h/2])
-        r.append((w+h)/4)
-        cv2.rectangle(frame,(x,y),(x+w,y+h),(0,255,0),2)
-    cv2.imshow('image', frame)
-    cv2.waitKey(0)
-    return point, r
 
 def FindMatch(img_right,img_left,points_img_right,roi_list):
     # Create an ORB detector
@@ -102,8 +81,6 @@ def FindMatch(img_right,img_left,points_img_right,roi_list):
     #     if match_img_temp: final_matches_img.append(match_img_temp)
     # if final_matches_img:
     #     matched_image = cv2.drawMatches(img_right, keypoints1, img_left, keypoints2, final_matches_img[0], None, flags=cv2.DrawMatchesFlags_NOT_DRAW_SINGLE_POINTS)
-    #     cv2.imshow('Matches', matched_image)
-    #     cv2.waitKey(0)
     return final_matches,final_matches_img
 
 def EstDistance(match,pixelxl,pixelxr,dis_cam,anglel,angler):
@@ -141,30 +118,38 @@ if not cap_right:
     
     
 else:
-
+    frameNumber = 0
     first = True
     while True:
         #capture frame_right by frame_right
         _, frame_right = cap_right.read()
         _, frame_left = cap_left.read()
         #convert video into gray scale of each frame_rights
-        # frame_left = cv2.resize(frame_left,(pixelx_left,pixely_left))
-        # frame_right = cv2.resize(frame_right,(pixelx_right,pixely_right))
+        frameNumber = frameNumber+1
+        frame_left = cv2.resize(frame_left,(pixelx_left,pixely_left))
+        frame_right = cv2.resize(frame_right,(pixelx_right,pixely_right))
         points_img_right,r = DetectObject(objName,frame_right)
         final_match = []
         final_match_img = []
-        final_match,final_match_img = FindMatch(frame_right,frame_left,points_img_right,r)
+        final_match, match_img = FindMatch(frame_right,frame_left,points_img_right,r)
         distance = []
         distance = EstDistance(final_match,pixelx_left,pixelx_right,dis_camera,w_left,w_right)
-        # print(final_match)
         print("Observe Distance:", distance)
-        if first:
-            first = False
-            if distance:
+        if distance:
+            if first:
+                first = False
                 x = [distance[0], 0.0]
-            else:
-                x = [0.0, 0.0]
-            p = np.diag([1,1])
-        x,p = kalman_filter(distance, 0.05, 0.1, 5.0, x, p)
-        print("Distance by k-filter:", x)
+                p = np.diag([1,1])
+            x,p = kalman_filter(distance, frameNumber*frameTime, 0.1, 5.0, x, p)
+            frameNumber = 0
+        else:
+            continue
+        cv2.imshow('ObjectDetection',frame_right)
+        # cv2.imshow('match',match_img)
+        if cv2.waitKey(1) == ord('q'):
+            break
+
+    cap_left.release()
+    cap_right.release()
+    cv2.destroyAllWindows()
 
