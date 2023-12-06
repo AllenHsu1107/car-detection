@@ -7,8 +7,6 @@ import numpy as np
 import shutil
 
 def zoom_in(image, zoom_factor, center=None):
-
-    cv2.imshow('original', image) 
     image_shape = image.shape
     height = image_shape[0]
     width = image_shape[1]
@@ -76,7 +74,7 @@ if __name__ == "__main__":
     offset = 1.6
     for i, true_distance in enumerate(true_distances):
         multiple = int(math.ceil((true_distance - offset) / step))
-        if multiple < 7: # modify it if photo 1 -6 can be used
+        if multiple < 7: # modify it if photo 1 - 6 can be used
             multiple = 7
         photo_distance = multiple * step + offset
         input_image_path = f'../raw_photos/richard/{multiple}.jpg'
@@ -92,3 +90,4 @@ if __name__ == "__main__":
         file.write('Ground truth distances:\n')
         for true_distance in true_distances:
             file.write(f'{true_distance}\n')
+        file.close()
