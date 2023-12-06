@@ -2,7 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from scipy.integrate import odeint
 
-def spring_mass():
+def spring_mass(time_interval=0.1):
     def car1_motion(t):
 
         if t < car1_speed_up_time:
@@ -39,10 +39,11 @@ def spring_mass():
     # Time grid
     car1_acceleration = 2.5
     car1_velocity = 11
-    car1_constant_time = 60
+    car1_constant_time = 20
     car1_speed_up_time = car1_velocity / car1_acceleration
     time = car1_constant_time + car1_speed_up_time * 2
-    t = np.linspace(0, time, 100000)
+    num_data_point = int(time / time_interval) + 1
+    t = np.linspace(0, time, num_data_point)
 
     # Solve the differential equation for car 2
     solution_car2 = odeint(car2_spring_system, initial_conditions_car2, t, args=(m2, k, initial_distance))
@@ -66,3 +67,6 @@ def spring_mass():
     true_distance = displacement_car1 - displacement_car2
     time_intervals = [t[i + 1] - t[i] for i in range(len(t) - 1)]
     return true_distance, time_intervals
+
+if __name__ == "__main__":
+    spring_mass()

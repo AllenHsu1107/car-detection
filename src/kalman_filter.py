@@ -24,8 +24,9 @@ def kalman_filter(observed_distance, delta_t, process_variance, measurement_vari
 
 optimize = False
 np.random.seed(42)
-true_distance, time_intervals = spring_mass()
-time_intervals.insert(0, 1.0) # # Use 1.0 as a default for the first iteration
+time_interval = 0.1
+true_distance, time_intervals = spring_mass(time_interval)
+time_intervals.insert(0, time_interval) # # Use 1.0 as a default for the first iteration
 # true_distance = np.linspace(0, 100, 100)
 observed_distance = true_distance + np.random.normal(0, 5, len(true_distance))
 # time_intervals = np.random.uniform(0.5, 1.5, 100)
