@@ -22,7 +22,7 @@ def DetectObject(objName,img):
 
 path = 'example/GT_left (14).jpg'
 frame = cv2.imread(path)
-carx,cary = DetectObject(objName,frame)
 frame = cv2.resize(frame,(pixelx,pixely))
+carx,cary = DetectObject(objName,frame)
 cv2.imshow('ObjectDetection',frame)
 cv2.waitKey(0)
