@@ -30,6 +30,7 @@ def zoom_in(image, zoom_factor, center=None):
 
 def DetectObject(objName, original_image):
     image = np.copy(original_image)
+    py,px = image.shape[0],image.shape[1]
     output = model(image,verbose=False)
     first_output = output[0]
     names = first_output.names
@@ -37,8 +38,10 @@ def DetectObject(objName, original_image):
         if names[int(i.cls)] == objName:
             x1,y1,x2,y2 = int(i.xyxy[0][0]),int(i.xyxy[0][1]),int(i.xyxy[0][2]),int(i.xyxy[0][3])
             xmid, ymid = (x1+x2)/2,(y1+y2)/2
-            cv2.rectangle(image, (x1, y1), (x2, y2), (0, 255, 0), 3)
-    return (xmid, ymid)
+            if ((ymid/xmid < (py/px*8/3-2/3*py/xmid)) and (ymid/xmid < (-py/px*8/3+2*py/xmid)) and (ymid < 3/4*py)):
+                cv2.rectangle(image, (x1, y1), (x2, y2), (0, 255, 0), 3)
+                finalx,finaly = (x1+x2)/2,(y1+y2)/2
+    return (finalx,finaly)
 
 def create_image(image, center, acutal_distance, target_distance):
     zoom_factor = acutal_distance / target_distance
@@ -73,6 +76,8 @@ if __name__ == "__main__":
     offset = 1.6
     for i, true_distance in enumerate(true_distances):
         multiple = int(math.ceil((true_distance - offset) / step))
+        if multiple < 7: # modify it if photo 1 -6 can be used
+            multiple = 7
         photo_distance = multiple * step + offset
         input_image_path = f'../raw_photos/richard/{multiple}.jpg'
         image = cv2.imread(input_image_path)
