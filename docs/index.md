@@ -12,4 +12,6 @@ Yao-Ting Hsu
 
 # Required Submissions
 - [Proposal](proposal.md)
+- [Midterm Checkpoint Presentation Slides](https://docs.google.com/presentation/d/1-GUPI0LCd7Mbl2JiAEpbYrI3ESxLqF-0p_VlJoG8xX8/edit?usp=sharing)
+- [Final Presentation Slides](http://)
 - [Final Report](report.md)
