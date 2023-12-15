@@ -63,6 +63,7 @@ This project introduces a driving assistance system aimed at improving road safe
   For distance estimation, critical metrics encompass the speed of processing, precision in identifying objects or individuals, and system reliability under diverse environmental conditions. As for the Kalman filter, the primary metric for success revolves around enhancing the accuracy of detected distances.
 
 # 2. Related Work
+  This section delves into pertinent studies within the realm of distance estimation, focusing on methodologies utilizing camera-based approaches. Notable prior works include the integration of stereo systems [2], machine learning techniques employing Fast R-CNN [3], and monocular systems leveraging deep learning [4].
 
 # 3. Technical Approach
 
@@ -78,9 +79,15 @@ This project introduces a driving assistance system aimed at improving road safe
   The project is implemented on a Raspberry Pi 4 (RPI4), integrating an On-Board Diagnostics (OBD) adapter to acquire real-time car speed data and a USB webcam for visual input. This hardware ensemble forms the foundation for the successful execution of the proposed technical approach, combining the power of YOLO, the adaptability of the Kalman filter, and the comprehensive data inputs from the OBD and webcam components.
 
 # 4. Evaluation and Results
+  In evaluating the system's performance, a comparison was made between the distances estimated by the system and the ground truth. Notably, approximately 68.5% of the ground truth fell within the range of distances estimated by the system. Following the implementation of the Kalman filter, this accuracy significantly improved, with approximately 94.1% of the ground truth aligning with the estimated distances.
+
+  Real-time testing further validated the system's efficacy in successfully identifying the front car, accurately estimating distances, and providing timely warnings to the driver when violating the 3-second rule. These results underscore the system's capability to enhance road safety by delivering reliable distance estimations and proactive alerts in dynamic driving scenarios.
 
 # 5. Discussion and Conclusions
+  The project's exploration of a driving assistance system has provided valuable insights into its potential to enhance road safety through precise distance estimations and proactive driver warnings. Despite the system's effectiveness in achieving its objectives, a key limitation emerged, revealing the computational challenges of the Raspberry Pi 4, particularly in tandem with YOLO, where the achieved frames per second fell below optimal levels.
 
+  In looking towards future enhancements, several strategic considerations emerge. Transitioning to the Raspberry Pi 5, with its heightened computational capabilities, presents a viable solution to address the current limitation, potentially elevating the system's real-time processing performance to meet or exceed the desired thresholds. Additionally, exploring adaptation for smartphones, equipped with superior computational resources and ubiquitous among drivers, and integrating the system with widely-used in-car recorders provide exciting avenues for scalability and user accessibility.
+  
 # 6. References
 
 [1] Welch, Greg, and Gary Bishop. "An introduction to the Kalman filter." (1995): 2. https://perso.crans.org/club-krobot/doc/kalman.pdf
@@ -90,8 +97,10 @@ https://arxiv.org/abs/2003.14299
 
 [3] Donghao Qiao, Farhana H. Zulkernine (2020). "Vision-based Vehicle Detection and Distance Estimation". Conference: 2020 IEEE Symposium Series on Computational Intelligence (SSCI). 
 
-[4] https://github.com/Arun-purakkatt/medium_repo
+[4] Masoumian, A.; Rashwan, H.A.; Cristiano, J.; Asif, M.S.; Puig, D. Monocular Depth Estimation Using Deep Learning: A Review. Sensors 2022, 22, 5353. https://doi.org/10.3390/s22145353
 
-[5] https://github.com/ultralytics/ultralytics.git
+[5] https://github.com/Arun-purakkatt/medium_repo
 
-[6] https://github.com/eric612/Vehicle-Detection.git
+[6] https://github.com/ultralytics/ultralytics.git
+
+[7] https://github.com/eric612/Vehicle-Detection.git
